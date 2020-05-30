@@ -21,6 +21,10 @@ task copyJavaTemplates(type: Copy) {
   filteringCharset = 'UTF-8'
 }
 
+tasks.withType(JavaCompile) {
+  options.encoding = "UTF-8"
+}
+
 dependencies {
   api deps.okio
   api deps.kotlinStdlib

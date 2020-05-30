@@ -11,4 +11,5 @@ dependencies {
 
 tasks.withType(JavaCompile) {
   options.warnings = false
+  options.encoding = "UTF-8"
 }

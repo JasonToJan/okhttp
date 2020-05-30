@@ -242,75 +242,75 @@ subprojects { project ->
 }
 
 /** Configure publishing and signing for published Java and JavaPlatform subprojects. */
-subprojects { project ->
-  if (project.ext.artifactId == null) return
-  def bom = project.ext.artifactId == 'okhttp-bom'
-
-  if (bom) {
-    apply plugin: 'java-platform'
-  }
-
-  apply plugin: 'maven-publish'
-  apply plugin: 'signing'
-
-  publishing {
-    if (!bom) {
-      java {
-        withJavadocJar()
-        withSourcesJar()
-      }
-    }
-
-    publications {
-      maven(MavenPublication) {
-        groupId = project.group
-        artifactId = project.ext.artifactId
-        version = project.version
-        if (bom) {
-          from components.javaPlatform
-        } else {
-          from components.java
-        }
-        pom {
-          name = project.name
-          description = 'Square’s meticulous HTTP client for Java and Kotlin.'
-          url = 'https://square.github.io/okhttp/'
-          licenses {
-            license {
-              name = 'The Apache Software License, Version 2.0'
-              url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-            }
-          }
-          developers {
-            developer {
-              name = 'Square, Inc.'
-            }
-          }
-          scm {
-            connection = 'scm:git:https://github.com/square/okhttp.git'
-            developerConnection = 'scm:git:ssh://git@github.com/square/okhttp.git'
-            url = 'https://github.com/square/okhttp'
-          }
-        }
-      }
-    }
-
-    repositories {
-      maven {
-        name = "mavencentral"
-        url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-        credentials {
-          username System.getenv('SONATYPE_NEXUS_USERNAME')
-          password System.getenv('SONATYPE_NEXUS_PASSWORD')
-        }
-      }
-    }
-  }
-
-  signing {
-    sign publishing.publications.maven
-  }
-}
+//subprojects { project ->
+//  if (project.ext.artifactId == null) return
+//  def bom = project.ext.artifactId == 'okhttp-bom'
+//
+//  if (bom) {
+//    apply plugin: 'java-platform'
+//  }
+//
+//  apply plugin: 'maven-publish'
+//  apply plugin: 'signing'
+//
+//  publishing {
+//    if (!bom) {
+//      java {
+//        withJavadocJar()
+//        withSourcesJar()
+//      }
+//    }
+//
+//    publications {
+//      maven(MavenPublication) {
+//        groupId = project.group
+//        artifactId = project.ext.artifactId
+//        version = project.version
+//        if (bom) {
+//          from components.javaPlatform
+//        } else {
+//          from components.java
+//        }
+//        pom {
+//          name = project.name
+//          description = 'Square’s meticulous HTTP client for Java and Kotlin.'
+//          url = 'https://square.github.io/okhttp/'
+//          licenses {
+//            license {
+//              name = 'The Apache Software License, Version 2.0'
+//              url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//            }
+//          }
+//          developers {
+//            developer {
+//              name = 'Square, Inc.'
+//            }
+//          }
+//          scm {
+//            connection = 'scm:git:https://github.com/square/okhttp.git'
+//            developerConnection = 'scm:git:ssh://git@github.com/square/okhttp.git'
+//            url = 'https://github.com/square/okhttp'
+//          }
+//        }
+//      }
+//    }
+//
+//    repositories {
+//      maven {
+//        name = "mavencentral"
+//        url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+//        credentials {
+//          username System.getenv('SONATYPE_NEXUS_USERNAME')
+//          password System.getenv('SONATYPE_NEXUS_PASSWORD')
+//        }
+//      }
+//    }
+//  }
+//
+//  signing {
+//    sign publishing.publications.maven
+//  }
+//}
 
 
 tasks.wrapper {
